@@ -52,7 +52,9 @@ class App extends Component {
     console.log(999999, product)
     Axios.put(`/api/products/${product.editId}`, product).then( products => {
       this.setState({
-        productList: products.data
+        productList: products.data,
+        editMode: false,
+        editProduct:{}
       })
     })
   }

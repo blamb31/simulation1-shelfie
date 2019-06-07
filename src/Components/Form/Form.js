@@ -52,6 +52,16 @@ export default class Form extends Component{
         })
     }
 
+    handleSaveClick = () => {
+        this.props.saveEditedProduct(this.state)
+        this.setState({
+            image_url : '',
+            name: '',
+            price: 0,
+            editId: null
+        })
+    }
+
     render() {
         return(
             <div>
@@ -69,14 +79,11 @@ export default class Form extends Component{
                 </div>
                 <div>
                     <button onClick={this.handleCancelClick}>Cancel</button>
-                    {(!this.props.editMode) ?
+                    {(!this.state.editId) ?
                         
                         <button onClick={() => this.handleAddClick}>Add to Inventory</button>
                     :
-                        <button onClick={() => {
-                            console.log(this.state)
-                            this.props.saveEditedProduct(this.state)}
-                        }>Save Changes</button>
+                        <button onClick={this.handleSaveClick}>Save Changes</button>
                         
                     }
                 </div>
