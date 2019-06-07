@@ -7,9 +7,13 @@ export default class Product extends Component {
     }
 
     render() {
+        let {product} = this.props
+        console.log(333333333, product)
         return(
             <div>
-                Product
+                <img src={product.image_url} />
+                <h2>{product.name}</h2>
+                <h3>{`$ ${product.price}`}</h3>
             </div>
         )
     }

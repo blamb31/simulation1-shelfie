@@ -12,6 +12,8 @@ massive(CONNECTION_STRING).then( db => {
 
 app.use(express.json())
 
+
+
 app.get('/api/products', PC.read)
 app.post('/api/products', PC.create)
 

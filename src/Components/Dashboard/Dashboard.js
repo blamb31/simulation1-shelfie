@@ -8,10 +8,14 @@ export default class Dashboard extends Component {
     }
 
     render() {
+        let product = this.props.productList.map( elem => {
+            console.log(elem)
+            return <Product product={elem} />
+        })
         return(
             <div>
                 Dashboard
-                <Product />
+                {product}
             </div>
         )
     }
