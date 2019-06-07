@@ -9,9 +9,24 @@ export default class Form extends Component{
         this.state = {
             image_url : '',
             name: '',
-            price: 0
+            price: 0,
+            editId: null
         }
         this.handleChange = this.handleChange.bind(this)
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if(prevProps !== this.props) {
+            let {image_url, name, price, id} = this.props.editProduct
+
+            this.setState({
+                image_url,
+                name,
+                price,
+                editId:id
+            })
+
+        }
     }
 
     handleChange(name, input) {
@@ -20,7 +35,16 @@ export default class Form extends Component{
         })
     }
 
-    handleCancelClick() {
+    handleCancelClick =() => {
+        this.setState({
+            image_url: '',
+            name: '',
+            price: 0
+        })
+    }
+
+    handleAddClick = () => {
+        this.props.addProduct(this.state)
         this.setState({
             image_url: '',
             name: '',
@@ -44,9 +68,17 @@ export default class Form extends Component{
                     <input type='number' name='price' value={this.state.price} onChange={(e) => this.handleChange(e.target.name , e.target.value)} placeholder='Price' />
                 </div>
                 <div>
-                    <button>Cancel</button>
-                    <button>Add to Inventory</button>
-                    {/* <button>Save Changes</button> */}
+                    <button onClick={this.handleCancelClick}>Cancel</button>
+                    {(!this.props.editMode) ?
+                        
+                        <button onClick={() => this.handleAddClick}>Add to Inventory</button>
+                    :
+                        <button onClick={() => {
+                            console.log(this.state)
+                            this.props.saveEditedProduct(this.state)}
+                        }>Save Changes</button>
+                        
+                    }
                 </div>
             </div>
         )

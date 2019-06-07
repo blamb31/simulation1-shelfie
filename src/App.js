@@ -11,11 +11,13 @@ class App extends Component {
     super(props)
 
     this.state = {
-      productList: []
+      productList: [],
+      editMode: false,
+      editProduct: {}
     }
   }
 
-  componentDidMount() {
+  componentDidMount =() => {
     Axios.get('/api/products').then( products => {
       this.setState({
         productList: products.data
@@ -23,12 +25,45 @@ class App extends Component {
     }).catch(err => console.log(err))
   }
 
+  addProduct = (newProduct) => {
+    Axios.post('/api/products', newProduct).then( products => {
+        this.setState({
+          productList: products.data
+        })
+    })
+  }
+
+  deleteProduct = (id) => {
+    Axios.delete(`/api/products/${id}`).then( products =>{
+      this.setState({
+        productList: products.data
+      })
+    })
+  }
+
+  editProduct = (product) => {
+    this.setState({
+      editProduct: product,
+      editMode: true
+    })
+  }
+
+  saveEditedProduct = (product) => {
+    console.log(999999, product)
+    Axios.put(`/api/products/${product.editId}`, product).then( products => {
+      this.setState({
+        productList: products.data
+      })
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <Header />
-        <Dashboard productList={this.state.productList} />
-        <Form />
+        <Dashboard editProduct={this.editProduct} deleteProduct={this.deleteProduct} productList={this.state.productList} />
+        <Form saveEditedProduct={this.saveEditedProduct} editProduct={this.state.editProduct} editMode={this.state.editMode} 
+        addProduct={this.addProduct} />
   
       </div>
     );
