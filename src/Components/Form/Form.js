@@ -81,7 +81,7 @@ export default class Form extends Component{
                     <button onClick={this.handleCancelClick}>Cancel</button>
                     {(!this.state.editId) ?
                         
-                        <button onClick={() => this.handleAddClick}>Add to Inventory</button>
+                        <button onClick={ this.handleAddClick}>Add to Inventory</button>
                     :
                         <button onClick={this.handleSaveClick}>Save Changes</button>
                         
