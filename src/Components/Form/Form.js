@@ -67,9 +67,9 @@ export default class Form extends Component{
             <div>
                 <div>
                     {(this.state.image_url) ?
-                        <img height='300' width='400' src={this.state.image_url} />
+                        <img height='200' src={this.state.image_url} />
                     :
-                        <img height='300' width='400' src='https://cdn.shopify.com/s/files/1/0249/6132/t/46/assets/no-image.svg?419'/>
+                        <img height='200'  src='https://cdn.shopify.com/s/files/1/0249/6132/t/46/assets/no-image.svg?419'/>
                     }
                 </div>
                 <div>
